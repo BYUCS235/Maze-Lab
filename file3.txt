@@ -1,0 +1,9 @@
+importMaze Mazes/Solvable1.txt
+toString
+solveMaze
+importMaze Mazes/Solvable2.txt
+toString
+solveMaze
+importMaze Mazes/Solvable3.txt
+toString
+solveMaze

@@ -1,0 +1,11 @@
+toString
+importMaze Mazes/Invalid1.txt
+toString
+importMaze Mazes/Solvable1.txt
+toString
+importMaze Mazes/Invalid2.txt
+toString
+importMaze Mazes/Invalid3.txt
+importMaze Mazes/Invalid4.txt
+importMaze Mazes/Invalid5.txt
+importMaze Mazes/Nonexistant.txt

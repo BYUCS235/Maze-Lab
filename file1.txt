@@ -1,0 +1,12 @@
+importMaze Mazes/Solvable1.txt
+toString 
+importMaze Mazes/Solvable2.txt
+toString
+importMaze Mazes/Solvable3.txt
+toString
+importMaze Mazes/Unsolvable1.txt
+toString
+importMaze Mazes/Unsolvable2.txt
+toString
+importMaze Mazes/Unsolvable3.txt
+toString
