@@ -29,7 +29,7 @@ You will need the files in this github repository to complete your lab.
 * This will test your algorithm against several solvable mazes.  Each given maze should be properly imported and solved as described in the PathfinderInterface.h file.
 * A valid path is one which starts at the entrance (0, 0, 0) and ends at the exit (4, 4, 4) and does not contain any cycles. When moving between cells, the divers can only move up, down, left, right, forward, and backwards one cell at a time. No diagonals are allowed.
 
-### File 4 - Unsolvable Mazes (10 points)
+### File 4 - Unsolvable Mazes (20 points)
 * This will test your algorithm against several unsolvable mazes.  
 
 ### File 5 - Generate Random Mazes (10 points)
