@@ -36,8 +36,6 @@ You will need the files in this github repository to complete your lab.
 * This will test your createRandomMaze() function and your solveMaze() function.  
 * You will be required to generate several random mazes.  Because the mazes will be randomly generated, there is no key_file5 to compare against.  Rather, you should make sure that each generated maze is a valid maze.  Mazes will be tested by calling solveMaze() on the generated mazes.  You must return either a valid path or no path for each maze, and there should be several solvable mazes and several unsolvable mazes in the output.  If you have either no solvable mazes or unsolvable mazes, run the program again until several of each are generated.
 
-### Part 6 - Valgrind  (10 points Pass/Fail)
-* Run and pass Valgrind on your program to ensure that you have no memory leaks.
 
 ## Requirement Notes
 * You are required to write a seperate '.h' and '.cpp' for every class you implement.
