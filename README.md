@@ -41,7 +41,6 @@ You will need the files in this github repository to complete your lab.
 ## Requirement Notes
 * You are required to write a seperate '.h' and '.cpp' for every class you implement.
 * Strictly follow the formats explained in the interface provided. If not, your generated mazes and paths will not work with the test program we will use and your program will not work with the mazes we will use for Part 3. If there are problems with your lab due to format, you will not be able to pass off until the problems are resolved.
-* A common but flawed approach with this assignment can cause the test driver to run for upwards of 20 minutes.  Since neither you nor the TAs have time to wait this long, you will need to resolve this issue if it arises.  Please refer to this powerpoint to understand the issue and possible solutions
 * For the createRandomMaze() to correctly generate random numbers, #include <cstdlib> and use rand().  You should call srand() exactly once when the Pathfinder is generated.
 * The format of the Maze Files are as follows: each row and column of the first 2D layer correspond to the x and y dimensions, respectively. The layers of 2D arrays correspond to the z dimension.
 * Visually, this is what your code is creating:
