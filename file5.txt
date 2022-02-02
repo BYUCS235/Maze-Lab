@@ -1,10 +1,1 @@
 createRandomMaze
-createRandomMaze
-createRandomMaze
-createRandomMaze
-createRandomMaze
-createRandomMaze
-createRandomMaze
-createRandomMaze
-createRandomMaze
-createRandomMaze

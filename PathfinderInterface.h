@@ -2,7 +2,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unistd.h>
 using namespace std;
+
 
 /*
 WARNING: It is expressly forbidden to modify any part of this document, including its name
@@ -10,6 +12,9 @@ WARNING: It is expressly forbidden to modify any part of this document, includin
 class PathfinderInterface
 {
 public:
+	/*
+		Be sure to call initialize_random_seed() in your constructor!
+	*/
 	PathfinderInterface() {}
 	virtual ~PathfinderInterface() {}
 
@@ -85,4 +90,23 @@ public:
 	*/
 	virtual vector<string> solveMaze() = 0;
 	//-----------------------------------------------------------------------------------------
+
+	unsigned long mix(unsigned long a, unsigned long b, unsigned long c)
+	{
+		a=a-b;  a=a-c;  a=a^(c >> 13);
+		b=b-c;  b=b-a;  b=b^(a << 8);
+		c=c-a;  c=c-b;  c=c^(b >> 13);
+		a=a-b;  a=a-c;  a=a^(c >> 12);
+		b=b-c;  b=b-a;  b=b^(a << 16);
+		c=c-a;  c=c-b;  c=c^(b >> 5);
+		a=a-b;  a=a-c;  a=a^(c >> 3);
+		b=b-c;  b=b-a;  b=b^(a << 10);
+		c=c-a;  c=c-b;  c=c^(b >> 15);
+		return c;
+	}
+
+	void initialize_random_seed() {
+		unsigned long seed = mix(clock(), time(NULL), getpid());
+		srand(seed);
+	}
 };
