@@ -38,14 +38,14 @@ You will need the files in this github repository to complete your lab.
 
 ### File 5 - Generate Random Mazes (10 points)
 * This will test your createRandomMaze() function and your solveMaze() function.  
-* You will be required to generate several random mazes.  Because the mazes will be randomly generated, there is no key_file5 to compare against.  Rather, you should make sure that each generated maze is a valid maze.  Mazes will be tested by calling solveMaze() on the generated mazes.  You must return either a valid path or no path for each maze, and there should be several solvable mazes and several unsolvable mazes in the output.  If you have either no solvable mazes or unsolvable mazes, run the program again until several of each are generated.
-* The TA will have to check to make sure your Random Mazes are correct during the verification phase of the lab grading and it will not be checked by the autograder.
+* You will be required to generate several random mazes.  Because the mazes will be randomly generated, there is no key_file5 to compare against.  Rather, you should make sure that each generated maze is a valid maze.  Mazes will be tested by calling solveMaze() on the generated mazes.  You must return either a valid path or no path for each maze, and there should be several solvable mazes and several unsolvable mazes in the output.  If you have either no solvable mazes or unsolvable mazes, run the program again until at least one of each are generated.
+* The autograder will run createRandomMaze() until both a solvable and unsolvable maze is generated and will test each one. 
 
 
 ## Requirement Notes
 * You are required to write a seperate '.h' and '.cpp' for every class you implement.
 * Strictly follow the formats explained in the interface provided. If not, your generated mazes and paths will not work with the test program we will use and your program will not work with the mazes we will use for Part 3. If there are problems with your lab due to format, you will not be able to pass off until the problems are resolved.
-* For the createRandomMaze() to correctly generate random numbers, #include <cstdlib> and use rand().  You should call srand() exactly once when the Pathfinder is generated.
+* For the createRandomMaze() to correctly generate random numbers, call `initialize_random_seed()` in your Pathfinder constructor. 
 * The format of the Maze Files are as follows: each row and column of the first 2D layer correspond to the x and y dimensions, respectively. The layers of 2D arrays correspond to the z dimension.
 * Visually, this is what your code is creating:
   
