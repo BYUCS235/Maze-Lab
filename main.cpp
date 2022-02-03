@@ -22,7 +22,7 @@ std::string is_valid_path(vector<string> &vec, std::string mazeString);
 namespace ta {
 	std::istream& getline(std::istream& is, std::string& line);
 }
-
+using namespace std;
 
 int main() {
 
