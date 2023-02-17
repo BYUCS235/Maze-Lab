@@ -40,9 +40,9 @@ You should compile and run `validate.cpp` on each of your solutions before submi
 
 The first line of the maze file indicates the dimensions of the maze: number of rows, number of columns, number of levels.
 
-The the layout of each level is presented. Each level starts with an empty line, then an n_rows by n_columns block of text. `1` indicates a passable space, while `0` indicates a blocked space. A solution to the maze can only go through passable spaces. 
+The layout of each level is presented. Each level starts with an empty line, then an n_rows by n_columns block of text. `1` indicates a passable space, while `0` indicates a blocked space. A solution to the maze can only go through passable spaces. 
 
-The rows are numbered 0 to n_columns from top to bottom. The columns are numbered 0 to n_columns from left to right. The levels are numbered 0 to n_levels starting with the first level in the file to the last level in the file. 
+The rows are numbered 0 to n_rows from top to bottom. The columns are numbered 0 to n_columns from left to right. The levels are numbered 0 to n_levels starting with the first level in the file to the last level in the file. 
 
 The maze solution will always start at (0, 0, 0) and end at (n_rows-1, n_columns-1, n_levels-1) (i.e. the opposite corner of the maze). 
 
@@ -65,10 +65,8 @@ If the maze has a solution, print `SOLUTION` on the first line of the output fil
 
 0000
 0000
-0000
 0010
 
-0000
 0000
 0000
 0011
@@ -82,6 +80,7 @@ SOLUTION
 0 1 0
 1 1 0
 2 1 0
+3 1 0
 2 2 0
 2 2 1
 2 2 2
