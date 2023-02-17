@@ -1,6 +1,0 @@
-importMaze Mazes/Unsolvable1.txt
-solveMaze
-importMaze Mazes/Unsolvable2.txt
-solveMaze
-importMaze Mazes/Unsolvable3.txt
-solveMaze
