@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <string>
 #include <tuple>
+#include <type_traits>
 #include <vector>
 
 using Coord = std::tuple<size_t, size_t, size_t>;
@@ -42,7 +43,8 @@ public:
                     }
                     if (space != 0 && space != 1) {
                         std::stringstream error_message;
-                        error_message << "got invalid space at " << r << ' ' << c << ' ' << d << ": each space can only be 0 or 1, but this space is " << space;
+                        error_message << "got invalid space at " << r << ' ' << c << ' ' << d
+                                      << ": each space can only be 0 or 1, but this space is " << space;
                         throw std::runtime_error(error_message.str());
                     }
                     maze.push_back(space);
@@ -77,6 +79,23 @@ private:
         return std::get<2>(point) * height_ * width_ + std::get<0>(point) * width_ + std::get<1>(point);
     }
 };
+
+void read_coord(std::istream &in, size_t &row, size_t &column, size_t &depth) {
+    in >> row;
+    if (!in) {
+        throw std::runtime_error("could not read the row component of the coordinate");
+    }
+
+    in >> column;
+    if (!in) {
+        throw std::runtime_error("could not read the column component of the coordinate");
+    }
+
+    in >> depth;
+    if (!in) {
+        throw std::runtime_error("could not read the depth component of the coordinate");
+    }
+}
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
@@ -126,22 +145,10 @@ int main(int argc, char *argv[]) {
     std::getline(solution, line);
     line_stream.str(line);
 
-    line_stream >> row;
-    if (!line_stream) {
-        std::cerr << "[Line " << line_number << "]: could not read the row component of the coordinate." << std::endl;
-        return 1;
-    }
-
-    line_stream >> column;
-    if (!line_stream) {
-        std::cerr << "[Line " << line_number << "]: could not read the column component of the coordinate."
-                  << std::endl;
-        return 1;
-    }
-
-    line_stream >> depth;
-    if (!line_stream) {
-        std::cerr << "[Line " << line_number << "]: could not read the depth component of the coordinate." << std::endl;
+    try {
+        read_coord(line_stream, row, column, depth);
+    } catch (const std::runtime_error &e) {
+        std::cerr << "[Line " << line_number << "]: " << e.what() << std::endl;
         return 1;
     }
 
@@ -160,24 +167,10 @@ int main(int argc, char *argv[]) {
         size_t prev_column = column;
         size_t prev_depth = depth;
 
-        line_stream >> row;
-        if (!line_stream) {
-            std::cerr << "[Line " << line_number << "]: could not read the row component of the coordinate."
-                      << std::endl;
-            return 1;
-        }
-
-        line_stream >> column;
-        if (!line_stream) {
-            std::cerr << "[Line " << line_number << "]: could not read the column component of the coordinate."
-                      << std::endl;
-            return 1;
-        }
-
-        line_stream >> depth;
-        if (!line_stream) {
-            std::cerr << "[Line " << line_number << "]: could not read the depth component of the coordinate."
-                      << std::endl;
+        try {
+            read_coord(line_stream, row, column, depth);
+        } catch (const std::runtime_error &e) {
+            std::cerr << "[Line " << line_number << "]: " << e.what() << std::endl;
             return 1;
         }
 
@@ -196,9 +189,10 @@ int main(int argc, char *argv[]) {
             return 1;
         }
 
-        size_t total_moves = std::max(row, prev_row) - std::min(row, prev_row)
-                             + std::max(column, prev_column) - std::min(column, prev_column)
-                             + std::max(depth, prev_depth) - std::min(depth, prev_depth);
+        using signed_size_t = std::make_signed_t<size_t>;
+        signed_size_t total_moves = std::abs((signed_size_t) (row - prev_row)) +
+                                    std::abs((signed_size_t) (column - prev_column)) +
+                                    std::abs((signed_size_t) (depth - prev_depth));
         if (total_moves > 1) {
             std::cerr << "[Line " << line_number << "]: the solution attempts to move from "
                       << prev_row << ' ' << prev_column << ' ' << prev_depth << " to "
