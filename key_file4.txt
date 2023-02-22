@@ -1,6 +1,0 @@
-importMaze Mazes/Unsolvable1.txt True
-solveMaze Maze has no valid solution
-importMaze Mazes/Unsolvable2.txt True
-solveMaze Maze has no valid solution
-importMaze Mazes/Unsolvable3.txt True
-solveMaze Maze has no valid solution
