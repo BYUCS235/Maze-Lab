@@ -59,17 +59,17 @@ If the maze has a solution, print `SOLUTION` on the first line of the output fil
 ```
 3 4 3
 
-1100
-0100
-0110
+1 1 0 0
+0 1 0 0
+0 1 1 0
 
-0000
-0000
-0010
+0 0 0 0
+0 0 0 0
+0 0 1 0
 
-0000
-0000
-0011
+0 0 0 0
+0 0 0 0
+0 0 1 1
 ```
 
 **Solution**
