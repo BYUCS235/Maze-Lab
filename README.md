@@ -126,6 +126,114 @@ That way it will stop making further recursive calls from this spot as soon as o
 
 If you haven't done the Recursive Maze Exploration activity, PLEASE DO IT. It will help IMMENSELY on this lab. It works great as starter code.
 
+### The brilliance of data structures
+
+In this lab, you need to represent the data in memory. What strategy can you use?
+
+#### 3D Array
+
+One option could be to represent the maze as a 3D array (or nested vectors). 
+Because the dimensions of a given maze are not known until runtime, you have to put this array on the heap (use `new`).
+Loading the array would look something like:
+
+```c++
+int*** grid = new int**[NL];
+for (int lev = 0; lev < NL; lev++) {
+  grid[lev] = new int*[NR];
+  for (int row = 0; row < NR; row++) {
+    grid[lev][row] = new int[NC];
+      for (int col = 0; col < NC; col++) {
+        fin >> grid[lev][row][col];
+      }
+  }
+}
+```
+
+and accessing a value now looks like:
+
+```c++
+if (grid[lev][row][col] == 1) { ... }
+```
+
+#### Map
+
+Maybe you notice that once you have loaded the grid, all you actually do with it is get and set values based on a (r, c, l) triple.
+Essentially, you want these two methods:
+
+```c++
+int get(int row, int col, int lev);
+void set(int row, int col, int lev, int value);
+```
+
+So, you could create a class called `Grid` that delegates to a map:
+
+```c++
+class Grid {
+  private:
+  map<list<int>, int> _grid;
+  public:
+  int get(int row, int col, int lev) {
+    return _grid[{row, col, lev}];
+  }
+  /* ... other methods for initializing the Grid from an istream, etc. */
+}
+```
+
+And now when using the grid:
+```c++
+if (grid.get(row, col, lev) == 1) { ... }
+```
+
+#### Vector
+
+Well, if all you need to do is implement a Grid class with `get` and `set` and `friend void operator >>(istream& ins, Grid& grid)`,
+you could simply use a linear vector with a little indexing math:
+
+$index = lev \cdot NR \cdot NC + row \cdot NC + col$
+
+For example:
+
+```
+2 3 2
+
+A B C
+D E F
+
+G H I
+J K L
+```
+
+Is stored linearly as
+```
+A B C D E F G H I J  K  L
+0 1 2 3 4 5 6 7 8 9 10 11
+```
+
+What value is at `(1, 1, 1)`?
+
+$index = 1 \cdot 2 \cdot 3 + 1 \cdot 3 + col = 6 + 3 + 1 = 10$
+
+`K` is at `(1, 1, 1)`.
+
+So, the `Grid` class could instead be:
+
+```c++
+class Grid {
+  private:
+  vector<int> _grid;
+  int NR, NC, NL;
+  int _index(int row, int col, int lev) {
+    return lev * NR * NC + row * NC + col;
+  }
+  public:
+  int get(int row, int col, int lev) {
+    return _grid(_index(row, col, lev));
+  }
+  /* etc. */
+  friend istream& operator >>(istream &ins, Grid& grid);
+}
+```
+
 ## Above and beyond
 
 If you are looking for an additional challenge:
