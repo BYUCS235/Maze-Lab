@@ -211,26 +211,34 @@ A B C D E F G H I J  K  L
 
 What value is at `(1, 1, 1)`?
 
-$index = 1 \cdot 2 \cdot 3 + 1 \cdot 3 + col = 6 + 3 + 1 = 10$
+$index = 1 \cdot 2 \cdot 3 + 1 \cdot 3 + 1 = 6 + 3 + 1 = 10$
 
 `K` is at `(1, 1, 1)`.
 
-So, the `Grid` class could instead be:
+So, the `Grid` class could instead be something like:
 
 ```c++
 class Grid {
-  private:
-  vector<int> _grid;
-  int NR, NC, NL;
-  int _index(int row, int col, int lev) {
-    return lev * NR * NC + row * NC + col;
-  }
-  public:
-  int get(int row, int col, int lev) {
-    return _grid(_index(row, col, lev));
-  }
-  /* etc. */
-  friend istream& operator >>(istream &ins, Grid& grid);
+private:
+    vector<int> _grid;
+    int NR, NC, NL;
+    int _index(int row, int col, int lev) {
+        return lev * NR * NC + row * NC + col;
+    }
+public:
+    int get(int row, int col, int lev) {
+        return _grid[_index(row, col, lev)];
+    }
+    /* etc. */
+    friend istream& operator >>(istream &ins, Grid& grid) {
+        ins >> grid.NR >> grid.NC >> grid.NL;
+        int value;
+        for (int i = 0; i < grid.NR * grid.NC * grid.NL; i++) {
+            ins >> value;
+            grid._grid.push_back(value);
+        }
+        return ins;
+    }
 }
 ```
 
@@ -242,6 +250,6 @@ If you are looking for an additional challenge:
 - Write a separate program that finds all possible paths
   - Just be careful that nothing (i.e. your computer) explodes when there are too many solutions!
   - It might be a good idea to take an upper-limit parameter on how many solutions you will allow the program to find
-    - How many solutions are there in a 3 x 3 x 3 maze? How about a 4 x 4 x 4 maze? How about a 10 x 10 x 10 maze?
+    - How many solutions are there in a 3 x 3 x 3 all-1 maze? How about a 4 x 4 x 4 all-1 maze? How about a 10 x 10 x 10 all-1 maze?
 - Write a separate program that solves a maze and prints the solution using the input maze format but with `x` indicating the spaces in the path.
 - How can you organize your code into various `.cpp` and `.h` files to support both the assignment solution as well as these additional programs?
